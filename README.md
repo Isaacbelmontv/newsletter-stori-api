@@ -57,3 +57,7 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## DB diagram
+
+![DB](diagram.png)
