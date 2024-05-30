@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class User {
+export class Users {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -15,7 +15,7 @@ export class User {
   email: string;
 
   @Column({ type: 'varchar', length: 255 })
-  password: string; // encript
+  password: string;
 
   @Column({ type: 'varchar', length: 100 })
   role: string;
