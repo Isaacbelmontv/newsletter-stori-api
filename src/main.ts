@@ -7,6 +7,5 @@ async function bootstrap() {
   await app.listen(3000);
   const logger = new Logger('bootstrap');
   logger.log(`Listening on ${await app.getUrl()}`);
-
 }
 bootstrap();
