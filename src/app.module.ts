@@ -6,11 +6,11 @@ import { AppService } from './app.service';
 import config from './config';
 import { DatabaseModule } from './database/database.module';
 import { enviroments } from './enviroments';
-import { NewslettersDeliveryModule } from './newsletterDelivery/newsletters-delivery.module';
-import { NewslettersModule } from './newsletters/newsletters.module';
-import { SeedService } from './seed.service';
-import { SubscribersModule } from './subscribers/subscribers.module';
-import { UsersModule } from './users/users.module';
+import { NewslettersDeliveryModule } from './models/newsletterDelivery/newsletters-delivery.module';
+import { NewslettersModule } from './models/newsletters/newsletters.module';
+import { SeedService } from './services/seed.service';
+import { SubscribersModule } from './models/subscribers/subscribers.module';
+import { UsersModule } from './models/users/users.module';
 
 @Module({
   imports: [

@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Newsletters } from './newsletters/entities/newsletters.entity';
-import { Subscribers } from './subscribers/entities/subscribers.entity';
-import { Users } from './users/entities/users.entity';
+import { Newsletters } from './models/newsletters/entities/newsletters.entity';
+import { Subscribers } from './models/subscribers/entities/subscribers.entity';
+import { Users } from './models/users/entities/users.entity';
 
 @Injectable()
 export class SeedService {

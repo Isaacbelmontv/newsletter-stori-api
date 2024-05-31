@@ -1,6 +1,6 @@
-import { Newsletters } from 'src/newsletters/entities/newsletters.entity';
-import { Subscribers } from 'src/subscribers/entities/subscribers.entity';
-import { Users } from 'src/users/entities/users.entity';
+import { Newsletters } from 'src/models/newsletters/entities/newsletters.entity';
+import { Subscribers } from 'src/models/subscribers/entities/subscribers.entity';
+import { Users } from 'src/models/users/entities/users.entity';
 import {
   CreateDateColumn,
   Entity,

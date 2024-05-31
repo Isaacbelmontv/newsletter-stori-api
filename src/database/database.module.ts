@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import config from '../config';
-import { Users } from '../users/entities/users.entity';
-import { Subscribers } from 'src/subscribers/entities/subscribers.entity';
-import { Newsletters } from 'src/newsletters/entities/newsletters.entity';
+import { Users } from '../models/users/entities/users.entity';
+import { Subscribers } from 'src/models/subscribers/entities/subscribers.entity';
+import { Newsletters } from 'src/models/newsletters/entities/newsletters.entity';
 
 const API_KEY = '12345634';
 

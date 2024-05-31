@@ -1,23 +1,27 @@
-import { NewslettersDelivery } from 'src/newsletterDelivery/entities/newsletters-delivery.entity';
+import { Users } from 'src/models/users/entities/users.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToMany,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class Subscribers {
+export class Newsletters {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'varchar', length: 255 })
-  email: string;
+  title: string;
 
-  @Column({ type: 'bool' })
-  active: boolean;
+  @Column({ type: 'varchar', length: 255 })
+  content: string;
+
+  @Column({ type: 'bytea', nullable: true })
+  assets: Express.Multer.File;
 
   @CreateDateColumn({
     type: 'timestamptz',
@@ -31,9 +35,7 @@ export class Subscribers {
   })
   updateAt: Date;
 
-  @ManyToMany(
-    () => NewslettersDelivery,
-    (newsletterDelivery) => newsletterDelivery.subscriber,
-  )
-  deliveries: NewslettersDelivery[];
+  @ManyToOne(() => Users, (user) => user.newsletters)
+  @JoinColumn({ name: 'user_id' })
+  user: Users;
 }

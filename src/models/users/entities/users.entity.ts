@@ -1,5 +1,5 @@
-import { NewslettersDelivery } from 'src/newsletterDelivery/entities/newsletters-delivery.entity';
-import { Newsletters } from 'src/newsletters/entities/newsletters.entity';
+import { NewslettersDelivery } from 'src/models/newsletterDelivery/entities/newsletters-delivery.entity';
+import { Newsletters } from 'src/models/newsletters/entities/newsletters.entity';
 import {
   Column,
   CreateDateColumn,
