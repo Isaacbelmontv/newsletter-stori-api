@@ -1,6 +1,6 @@
+import { Users } from '@models/users/entities/users.entity';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Users } from '../users/entities/users.entity';
 import { NewslettersController } from './controllers/newsletters.controller';
 import { Newsletters } from './entities/newsletters.entity';
 import { NewslettersService } from './services/newsletters.service';

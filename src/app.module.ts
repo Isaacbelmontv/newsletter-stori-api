@@ -1,16 +1,16 @@
+import { NewslettersDeliveryModule } from '@models/newsletterDelivery/newsletters-delivery.module';
+import { NewslettersModule } from '@models/newsletters/newsletters.module';
+import { SubscribersModule } from '@models/subscribers/subscribers.module';
+import { UsersModule } from '@models/users/users.module';
 import { Module, OnModuleInit } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { SeedService } from '@services/seed.service';
 import * as Joi from 'joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import config from './config';
 import { DatabaseModule } from './database/database.module';
 import { enviroments } from './enviroments';
-import { NewslettersDeliveryModule } from './models/newsletterDelivery/newsletters-delivery.module';
-import { NewslettersModule } from './models/newsletters/newsletters.module';
-import { SeedService } from './services/seed.service';
-import { SubscribersModule } from './models/subscribers/subscribers.module';
-import { UsersModule } from './models/users/users.module';
 
 @Module({
   imports: [
