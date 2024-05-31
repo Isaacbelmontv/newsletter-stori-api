@@ -8,6 +8,8 @@ import { DatabaseModule } from './database/database.module';
 import { enviroments } from './enviroments';
 import { UsersModule } from './users/users.module';
 import { SubscribersModule } from './subscribers/subscribers.module';
+import { NewslettersDeliveryModule } from './newsletterDelivery/newsletters-delivery.module';
+import { NewslettersModule } from './newsletters/newsletters.module';
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import { SubscribersModule } from './subscribers/subscribers.module';
     }),
     UsersModule,
     SubscribersModule,
+    NewslettersModule,
+    NewslettersDeliveryModule,
     DatabaseModule,
   ],
   controllers: [AppController],

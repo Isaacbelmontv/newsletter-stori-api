@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty, IsInt } from 'class-validator';
 
 export class CreateNewslettersDto {
   @IsString()
@@ -10,4 +10,8 @@ export class CreateNewslettersDto {
   readonly content: string;
 
   readonly assets: Buffer;
+
+  @IsInt()
+  @IsNotEmpty()
+  readonly users: number;
 }

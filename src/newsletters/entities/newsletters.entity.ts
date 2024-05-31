@@ -1,7 +1,10 @@
+import { Users } from 'src/users/entities/users.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -31,4 +34,8 @@ export class Newsletters {
     default: () => 'CURRENT_TIMESTAMP',
   })
   updateAt: Date;
+
+  @ManyToOne(() => Users, (user) => user.newsletters)
+  @JoinColumn({ name: 'user_id' })
+  user: Users;
 }

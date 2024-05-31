@@ -1,7 +1,10 @@
+import { NewslettersDelivery } from 'src/newsletterDelivery/entities/newsletters-delivery.entity';
+import { Newsletters } from 'src/newsletters/entities/newsletters.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -31,4 +34,13 @@ export class Users {
     default: () => 'CURRENT_TIMESTAMP',
   })
   updateAt: Date;
+
+  @OneToMany(() => Newsletters, (newsletters) => newsletters.user)
+  newsletters: Newsletters[];
+
+  @OneToMany(
+    () => NewslettersDelivery,
+    (newslettersDelivery) => newslettersDelivery.user,
+  )
+  newslettersDeliveries: NewslettersDelivery[];
 }

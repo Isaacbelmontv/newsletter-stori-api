@@ -3,7 +3,7 @@ import { CreateNewslettersDto } from '../dtos/newsletters.dto';
 import { NewslettersService } from '../services/newsletters.service';
 
 @Controller('newsletters')
-export class NewsletterssController {
+export class NewslettersController {
   constructor(private newsletterssService: NewslettersService) {}
 
   @Post()

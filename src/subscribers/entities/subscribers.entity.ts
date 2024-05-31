@@ -1,7 +1,9 @@
+import { NewslettersDelivery } from 'src/newsletterDelivery/entities/newsletters-delivery.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -28,4 +30,10 @@ export class Subscribers {
     default: () => 'CURRENT_TIMESTAMP',
   })
   updateAt: Date;
+
+  @ManyToMany(
+    () => NewslettersDelivery,
+    (newsletterDelivery) => newsletterDelivery.subscribers,
+  )
+  deliveries: NewslettersDelivery[];
 }
