@@ -7,6 +7,8 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 
 import { CreateUsersDto } from '../dtos/users.dto';
@@ -22,6 +24,7 @@ export class UsersController {
   }
 
   @Post()
+  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   create(@Body() payload: CreateUsersDto) {
     try {
       this.usersService.create(payload);

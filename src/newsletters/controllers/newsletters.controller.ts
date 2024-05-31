@@ -4,6 +4,8 @@ import {
   HttpException,
   HttpStatus,
   Post,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { CreateNewslettersDto } from '../dtos/newsletters.dto';
 import { NewslettersService } from '../services/newsletters.service';
@@ -13,6 +15,7 @@ export class NewslettersController {
   constructor(private newslettersService: NewslettersService) {}
 
   @Post()
+  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   create(@Body() payload: CreateNewslettersDto) {
     try {
       this.newslettersService.create(payload);

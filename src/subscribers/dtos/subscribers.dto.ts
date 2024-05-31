@@ -1,10 +1,10 @@
-import { IsString, IsNotEmpty, IsEmail } from 'class-validator';
+import { IsString, IsEmail, IsNotEmpty } from 'class-validator';
 
 export class CreateSubscribersDto {
   @IsString()
   @IsEmail()
+  @IsNotEmpty()
   readonly email: string;
 
-  @IsNotEmpty()
   active: boolean;
 }
