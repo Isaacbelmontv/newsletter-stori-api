@@ -1,14 +1,16 @@
 import {
+  Body,
   Controller,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
-  Post,
-  Body,
   ParseIntPipe,
+  Post,
 } from '@nestjs/common';
 
-import { UsersService } from '../services/users.service';
 import { CreateUsersDto } from '../dtos/users.dto';
+import { UsersService } from '../services/users.service';
 
 @Controller('users')
 export class UsersController {
@@ -21,6 +23,17 @@ export class UsersController {
 
   @Post()
   create(@Body() payload: CreateUsersDto) {
-    return this.usersService.create(payload);
+    try {
+      this.usersService.create(payload);
+      return {
+        message: 'User created successfully',
+        status: HttpStatus.OK,
+      };
+    } catch (error) {
+      throw new HttpException(
+        'Failed to create User',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }

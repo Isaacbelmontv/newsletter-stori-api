@@ -1,13 +1,30 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpException,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
 import { CreateNewslettersDto } from '../dtos/newsletters.dto';
 import { NewslettersService } from '../services/newsletters.service';
 
 @Controller('newsletters')
 export class NewslettersController {
-  constructor(private newsletterssService: NewslettersService) {}
+  constructor(private newslettersService: NewslettersService) {}
 
   @Post()
   create(@Body() payload: CreateNewslettersDto) {
-    return this.newsletterssService.create(payload);
+    try {
+      this.newslettersService.create(payload);
+      return {
+        message: 'newsletters created successfully',
+        status: HttpStatus.OK,
+      };
+    } catch (error) {
+      throw new HttpException(
+        'Failed to create newsletters',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }
