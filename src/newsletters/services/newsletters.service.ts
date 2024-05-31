@@ -15,10 +15,13 @@ export class NewslettersService {
   ) {}
 
   async create(data: CreateNewslettersDto) {
-    const newNewsletter = this.newslettersRepo.create(data);
+    const newNewsletter = new Newsletters();
+    newNewsletter.title = data.title;
+    newNewsletter.content = data.content;
+    newNewsletter.assets = data.assets;
 
-    if (data.users) {
-      const user = await this.userRepo.findOne({ where: { id: data.users } });
+    if (data.user) {
+      const user = await this.userRepo.findOne({ where: { id: data.user } });
       if (user) {
         newNewsletter.user = user;
       } else {

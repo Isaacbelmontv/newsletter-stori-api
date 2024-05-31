@@ -33,7 +33,7 @@ export class Subscribers {
 
   @ManyToMany(
     () => NewslettersDelivery,
-    (newsletterDelivery) => newsletterDelivery.subscribers,
+    (newsletterDelivery) => newsletterDelivery.subscriber,
   )
   deliveries: NewslettersDelivery[];
 }

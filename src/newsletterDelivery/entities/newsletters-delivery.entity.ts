@@ -37,7 +37,7 @@ export class NewslettersDelivery {
     joinColumn: { name: 'delivery_id', referencedColumnName: 'id' },
     inverseJoinColumn: { name: 'subscriber_id', referencedColumnName: 'id' },
   })
-  subscribers: Subscribers[];
+  subscriber: Subscribers[];
 
   @ManyToMany(() => Newsletters)
   @JoinTable({
@@ -45,5 +45,5 @@ export class NewslettersDelivery {
     joinColumn: { name: 'delivery_id', referencedColumnName: 'id' },
     inverseJoinColumn: { name: 'newsletter_id', referencedColumnName: 'id' },
   })
-  newsletters: Newsletters[];
+  newsletter: Newsletters[];
 }

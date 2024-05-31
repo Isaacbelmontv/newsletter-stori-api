@@ -21,7 +21,7 @@ export class Newsletters {
   content: string;
 
   @Column({ type: 'bytea', nullable: true })
-  assets: Buffer;
+  assets: Express.Multer.File;
 
   @CreateDateColumn({
     type: 'timestamptz',

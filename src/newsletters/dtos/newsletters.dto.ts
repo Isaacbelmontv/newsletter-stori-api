@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsInt } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateNewslettersDto {
   @IsString()
@@ -9,9 +9,8 @@ export class CreateNewslettersDto {
   @IsNotEmpty()
   readonly content: string;
 
-  readonly assets: Buffer;
+  assets: Express.Multer.File;
 
-  @IsInt()
   @IsNotEmpty()
-  readonly users: number;
+  readonly user: number;
 }

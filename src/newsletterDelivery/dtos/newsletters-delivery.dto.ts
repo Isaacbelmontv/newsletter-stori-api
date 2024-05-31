@@ -3,13 +3,13 @@ import { IsInt, IsNotEmpty } from 'class-validator';
 export class CreateNewslettersDeliveryDto {
   @IsInt()
   @IsNotEmpty()
-  readonly users: number;
+  readonly user: number;
 
   @IsInt()
   @IsNotEmpty()
-  readonly subscribers: number;
+  readonly subscriber: number;
 
   @IsInt()
   @IsNotEmpty()
-  readonly newsletters: number;
+  readonly newsletter: number;
 }

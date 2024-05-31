@@ -23,8 +23,8 @@ export class NewslettersDeliveryService {
   async create(data: CreateNewslettersDeliveryDto) {
     const newNewsletterDelivery = this.newslettersDeliveryRepo.create();
 
-    if (data.users) {
-      const user = await this.userRepo.findOne({ where: { id: data.users } });
+    if (data.user) {
+      const user = await this.userRepo.findOne({ where: { id: data.user } });
       if (user) {
         newNewsletterDelivery.user = user;
       } else {
@@ -32,23 +32,23 @@ export class NewslettersDeliveryService {
       }
     }
 
-    if (data.subscribers) {
+    if (data.subscriber) {
       const subscriber = await this.subscribersRepo.findOne({
-        where: { id: data.subscribers },
+        where: { id: data.subscriber },
       });
       if (subscriber) {
-        newNewsletterDelivery.subscribers = [subscriber];
+        newNewsletterDelivery.subscriber = [subscriber];
       } else {
         throw new Error('Subscriber not found');
       }
     }
 
-    if (data.newsletters) {
+    if (data.newsletter) {
       const newsletter = await this.newslettersRepo.findOne({
-        where: { id: data.newsletters },
+        where: { id: data.newsletter },
       });
       if (newsletter) {
-        newNewsletterDelivery.newsletters = [newsletter];
+        newNewsletterDelivery.newsletter = [newsletter];
       } else {
         throw new Error('Newsletter not found');
       }
