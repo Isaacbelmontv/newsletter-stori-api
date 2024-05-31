@@ -2,11 +2,15 @@ import { Module } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import config from '../config';
+import { Users } from '../users/entities/users.entity';
+import { Subscribers } from 'src/subscribers/entities/subscribers.entity';
+import { Newsletters } from 'src/newsletters/entities/newsletters.entity';
 
 const API_KEY = '12345634';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([Users, Subscribers, Newsletters]),
     TypeOrmModule.forRootAsync({
       inject: [config.KEY],
       useFactory: (configService: ConfigType<typeof config>) => {

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, OnModuleInit } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { AppController } from './app.controller';
@@ -6,10 +6,11 @@ import { AppService } from './app.service';
 import config from './config';
 import { DatabaseModule } from './database/database.module';
 import { enviroments } from './enviroments';
-import { UsersModule } from './users/users.module';
-import { SubscribersModule } from './subscribers/subscribers.module';
 import { NewslettersDeliveryModule } from './newsletterDelivery/newsletters-delivery.module';
 import { NewslettersModule } from './newsletters/newsletters.module';
+import { SeedService } from './seed.service';
+import { SubscribersModule } from './subscribers/subscribers.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -30,6 +31,11 @@ import { NewslettersModule } from './newsletters/newsletters.module';
     DatabaseModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, SeedService],
 })
-export class AppModule {}
+export class AppModule implements OnModuleInit {
+  constructor(private readonly seedService: SeedService) {}
+  async onModuleInit() {
+    await this.seedService.seedData();
+  }
+}
