@@ -7,16 +7,35 @@ import {
 } from '../dtos/subscribers.dto';
 import { Subscribers } from '../entities/subscribers.entity';
 import { ISubscription } from '@interfaces/subscription.interface';
+import { Newsletters } from '@models/newsletters/entities/newsletters.entity';
 
 @Injectable()
 export class SubscribersService {
   constructor(
     @InjectRepository(Subscribers)
     private subscribersRepo: Repository<Subscribers>,
+    @InjectRepository(Newsletters)
+    private newslettersRepo: Repository<Newsletters>,
   ) {}
 
   async create(data: CreateSubscribersDto) {
-    return this.subscribersRepo.save(data);
+    const newSubscribers = new Subscribers();
+    newSubscribers.active = true;
+    newSubscribers.email = data.email;
+
+    if (data.newsletters) {
+      const newsletters = await this.newslettersRepo.findOne({
+        where: { id: data.newsletters },
+      });
+
+      if (newsletters) {
+        newSubscribers.newsletters = newsletters;
+      } else {
+        throw new Error('newsletters not found');
+      }
+    }
+
+    return this.subscribersRepo.save(newSubscribers);
   }
 
   async update(id: number, changes: UpdateSubscribersDto) {
@@ -45,6 +64,24 @@ export class SubscribersService {
       }));
     } catch (error) {
       throw new Error('Failed to fetch subscriptions');
+    }
+  }
+
+  async findByEmail(email: string) {
+    try {
+      const subscribers = await this.subscribersRepo.find({
+        where: { email },
+        relations: ['newsletters'],
+        select: ['id', 'email', 'active'],
+      });
+
+      if (!subscribers.length) {
+        return null;
+      }
+
+      return subscribers;
+    } catch (error) {
+      throw new Error(`Failed to get subscriptions by email`);
     }
   }
 }

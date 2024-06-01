@@ -1,8 +1,11 @@
+import { Newsletters } from '@models/newsletters/entities/newsletters.entity';
 import { NewslettersDelivery } from 'src/models/newsletterDelivery/entities/newsletters-delivery.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -36,4 +39,8 @@ export class Subscribers {
     (newslettersDelivery) => newslettersDelivery.subscriber,
   )
   newslettersDeliveries: NewslettersDelivery;
+
+  @ManyToOne(() => Newsletters, (newsletters) => newsletters.subscribers)
+  @JoinColumn({ name: 'newsletters_id' })
+  newsletters: Newsletters;
 }

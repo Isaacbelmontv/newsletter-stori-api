@@ -1,4 +1,5 @@
 import { NewslettersDelivery } from '@models/newsletterDelivery/entities/newsletters-delivery.entity';
+import { Subscribers } from '@models/subscribers/entities/subscribers.entity';
 import { Users } from 'src/models/users/entities/users.entity';
 import {
   Column,
@@ -52,4 +53,7 @@ export class Newsletters {
     (newslettersDelivery) => newslettersDelivery.newsletters,
   )
   newslettersDeliveries: NewslettersDelivery;
+
+  @OneToMany(() => Subscribers, (subscribers) => subscribers.newsletters)
+  subscribers: Subscribers;
 }

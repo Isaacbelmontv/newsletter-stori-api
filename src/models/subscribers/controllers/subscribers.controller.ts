@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
   Param,
@@ -23,8 +24,6 @@ export class SubscribersController {
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   create(@Body() payload: CreateSubscribersDto) {
     try {
-      payload.active = true;
-
       this.subscribersService.create(payload);
       return {
         message: 'subscription created successfully',
@@ -50,6 +49,27 @@ export class SubscribersController {
     } catch (error) {
       throw new HttpException(
         'Failed to updated subscription',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  @Get(':email')
+  async get(@Param('email') email: string) {
+    try {
+      const subscriptions = await this.subscribersService.findByEmail(email);
+
+      if (!subscriptions) {
+        throw new HttpException(
+          'No subscriptions found for the given email',
+          HttpStatus.NOT_FOUND,
+        );
+      }
+
+      return subscriptions;
+    } catch (error) {
+      throw new HttpException(
+        'Failed to get subscriptions',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
