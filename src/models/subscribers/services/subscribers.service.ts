@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateSubscribersDto } from '../dtos/subscribers.dto';
+import {
+  CreateSubscribersDto,
+  UpdateSubscribersDto,
+} from '../dtos/subscribers.dto';
 import { Subscribers } from '../entities/subscribers.entity';
 import { ISubscription } from '@interfaces/subscription.interface';
 
@@ -14,6 +17,15 @@ export class SubscribersService {
 
   async create(data: CreateSubscribersDto) {
     return this.subscribersRepo.save(data);
+  }
+
+  async update(id: number, changes: UpdateSubscribersDto) {
+    const subscription = await this.subscribersRepo.findOne({ where: { id } });
+    if (subscription) {
+      this.subscribersRepo.merge(subscription, changes);
+    }
+
+    return this.subscribersRepo.save(subscription);
   }
 
   async getActiveSubscriptions(

@@ -1,3 +1,4 @@
+import { PartialType } from '@nestjs/mapped-types';
 import { IsString, IsEmail, IsNotEmpty } from 'class-validator';
 
 export class CreateSubscribersDto {
@@ -8,3 +9,5 @@ export class CreateSubscribersDto {
 
   active: boolean;
 }
+
+export class UpdateSubscribersDto extends PartialType(CreateSubscribersDto) {}
