@@ -1,3 +1,4 @@
+import { NewslettersDelivery } from '@models/newsletterDelivery/entities/newsletters-delivery.entity';
 import { Users } from 'src/models/users/entities/users.entity';
 import {
   Column,
@@ -5,6 +6,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -44,4 +46,10 @@ export class Newsletters {
   @ManyToOne(() => Users, (user) => user.newsletters)
   @JoinColumn({ name: 'user_id' })
   user: Users;
+
+  @OneToMany(
+    () => NewslettersDelivery,
+    (newslettersDelivery) => newslettersDelivery.newsletters,
+  )
+  newslettersDeliveries: NewslettersDelivery;
 }

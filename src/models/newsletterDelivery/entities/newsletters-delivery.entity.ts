@@ -4,8 +4,6 @@ import { Users } from '@models/users/entities/users.entity';
 import {
   CreateDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -31,19 +29,15 @@ export class NewslettersDelivery {
   @ManyToOne(() => Users, (user) => user.newslettersDeliveries)
   user: Users;
 
-  @ManyToMany(() => Subscribers, (subscriber) => subscriber.deliveries)
-  @JoinTable({
-    name: 'subscribers_deliveries',
-    joinColumn: { name: 'delivery_id', referencedColumnName: 'id' },
-    inverseJoinColumn: { name: 'subscriber_id', referencedColumnName: 'id' },
-  })
-  subscriber: Subscribers[];
+  @ManyToOne(
+    () => Subscribers,
+    (subscriber) => subscriber.newslettersDeliveries,
+  )
+  subscriber: Subscribers;
 
-  @ManyToMany(() => Newsletters)
-  @JoinTable({
-    name: 'newsletters_deliveries',
-    joinColumn: { name: 'delivery_id', referencedColumnName: 'id' },
-    inverseJoinColumn: { name: 'newsletter_id', referencedColumnName: 'id' },
-  })
-  newsletter: Newsletters[];
+  @ManyToOne(
+    () => Newsletters,
+    (newsletters) => newsletters.newslettersDeliveries,
+  )
+  newsletters: Newsletters;
 }

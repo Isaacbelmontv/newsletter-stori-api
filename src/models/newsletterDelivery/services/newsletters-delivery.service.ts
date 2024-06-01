@@ -37,7 +37,7 @@ export class NewslettersDeliveryService {
         where: { id: data.subscriber },
       });
       if (subscriber) {
-        newNewsletterDelivery.subscriber = [subscriber];
+        newNewsletterDelivery.subscriber = subscriber;
       } else {
         throw new Error('Subscriber not found');
       }
@@ -47,8 +47,9 @@ export class NewslettersDeliveryService {
       const newsletter = await this.newslettersRepo.findOne({
         where: { id: data.newsletter },
       });
+
       if (newsletter) {
-        newNewsletterDelivery.newsletter = [newsletter];
+        newNewsletterDelivery.newsletters = newsletter;
       } else {
         throw new Error('Newsletter not found');
       }
