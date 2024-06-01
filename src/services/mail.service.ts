@@ -9,11 +9,14 @@ export class MailService {
 
   async sendMail(subscription: ISubscription, newsletter: INewsletter) {
     try {
+      const urlUnsubscribe = `https://localhost:4200/unsubscribe/${subscription.id}`;
+      const unsubscribe = `</br><a href="${urlUnsubscribe}" rel="noopener" style="color:rgb(26,115,232);text-decoration:underline" target="_blank">unsubscribe</a>`;
+
       await this.mailService.sendMail({
         to: subscription.email,
         from: 'isaacbelmontv@gmail.com',
         subject: newsletter.title,
-        text: newsletter.content,
+        html: `${newsletter.content}${unsubscribe}`,
         attachments: [
           {
             filename: newsletter.assetname,
