@@ -1,4 +1,3 @@
-import { NewslettersDeliveryModule } from '@models/newsletterDelivery/newsletters-delivery.module';
 import { NewslettersModule } from '@models/newsletters/newsletters.module';
 import { SubscribersModule } from '@models/subscribers/subscribers.module';
 import { UsersModule } from '@models/users/users.module';
@@ -45,7 +44,6 @@ import { sendNewsletterEmailModule } from '@use-cases/send-newsletter-email/send
     UsersModule,
     SubscribersModule,
     NewslettersModule,
-    NewslettersDeliveryModule,
     sendNewsletterEmailModule,
     DatabaseModule,
   ],
