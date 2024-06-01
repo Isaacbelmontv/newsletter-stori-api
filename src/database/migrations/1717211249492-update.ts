@@ -1,13 +1,13 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class Update1717175885599 implements MigrationInterface {
-    name = 'Update1717175885599'
+export class Update1717211249492 implements MigrationInterface {
+    name = 'Update1717211249492'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`CREATE TABLE "newsletters" ("id" SERIAL NOT NULL, "title" character varying(255) NOT NULL, "content" character varying(255) NOT NULL, "assets" bytea, "createAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "updateAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "user_id" integer, CONSTRAINT "PK_b63ff3417bbaa6c92061b9f6934" PRIMARY KEY ("id"))`);
-        await queryRunner.query(`CREATE TABLE "subscribers" ("id" SERIAL NOT NULL, "email" character varying(255) NOT NULL, "active" boolean NOT NULL, "createAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "updateAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), CONSTRAINT "PK_cbe0a7a9256c826f403c0236b67" PRIMARY KEY ("id"))`);
-        await queryRunner.query(`CREATE TABLE "newsletters_delivery" ("id" SERIAL NOT NULL, "createAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "updateAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "userId" integer, CONSTRAINT "PK_03912fbe9a10ad0ae8848abeed8" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "users" ("id" SERIAL NOT NULL, "email" character varying(255) NOT NULL, "password" character varying(255) NOT NULL, "role" character varying(100) NOT NULL, "createAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "updateAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), CONSTRAINT "PK_a3ffb1c0c8416b9fc6f907b7433" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "newsletters" ("id" SERIAL NOT NULL, "title" character varying(255) NOT NULL, "content" character varying(255) NOT NULL, "assetFile" bytea, "assetType" character varying, "assetName" character varying, "createAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "updateAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "user_id" integer, CONSTRAINT "PK_b63ff3417bbaa6c92061b9f6934" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "newsletters_delivery" ("id" SERIAL NOT NULL, "createAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "updateAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "userId" integer, CONSTRAINT "PK_03912fbe9a10ad0ae8848abeed8" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "subscribers" ("id" SERIAL NOT NULL, "email" character varying(255) NOT NULL, "active" boolean NOT NULL, "createAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "updateAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), CONSTRAINT "PK_cbe0a7a9256c826f403c0236b67" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "subscribers_deliveries" ("delivery_id" integer NOT NULL, "subscriber_id" integer NOT NULL, CONSTRAINT "PK_bd52b5a7575da931e8b5f189028" PRIMARY KEY ("delivery_id", "subscriber_id"))`);
         await queryRunner.query(`CREATE INDEX "IDX_ffa113f7d1f78a1f4bef8fa458" ON "subscribers_deliveries" ("delivery_id") `);
         await queryRunner.query(`CREATE INDEX "IDX_598329216311b35c19f4b4e9fc" ON "subscribers_deliveries" ("subscriber_id") `);
@@ -35,10 +35,10 @@ export class Update1717175885599 implements MigrationInterface {
         await queryRunner.query(`DROP INDEX "public"."IDX_598329216311b35c19f4b4e9fc"`);
         await queryRunner.query(`DROP INDEX "public"."IDX_ffa113f7d1f78a1f4bef8fa458"`);
         await queryRunner.query(`DROP TABLE "subscribers_deliveries"`);
-        await queryRunner.query(`DROP TABLE "users"`);
-        await queryRunner.query(`DROP TABLE "newsletters_delivery"`);
         await queryRunner.query(`DROP TABLE "subscribers"`);
+        await queryRunner.query(`DROP TABLE "newsletters_delivery"`);
         await queryRunner.query(`DROP TABLE "newsletters"`);
+        await queryRunner.query(`DROP TABLE "users"`);
     }
 
 }

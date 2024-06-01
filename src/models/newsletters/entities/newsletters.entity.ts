@@ -21,7 +21,13 @@ export class Newsletters {
   content: string;
 
   @Column({ type: 'bytea', nullable: true })
-  assets: Express.Multer.File;
+  assetFile: Buffer;
+
+  @Column({ type: 'varchar', nullable: true })
+  assetType: string;
+
+  @Column({ type: 'varchar', nullable: true })
+  assetName: string;
 
   @CreateDateColumn({
     type: 'timestamptz',

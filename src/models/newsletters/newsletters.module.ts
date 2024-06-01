@@ -9,5 +9,6 @@ import { NewslettersService } from './services/newsletters.service';
   imports: [TypeOrmModule.forFeature([Newsletters, Users])],
   controllers: [NewslettersController],
   providers: [NewslettersService],
+  exports: [NewslettersService],
 })
 export class NewslettersModule {}

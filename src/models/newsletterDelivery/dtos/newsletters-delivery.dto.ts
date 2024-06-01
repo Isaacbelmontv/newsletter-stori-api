@@ -1,6 +1,6 @@
 import { IsInt, IsNotEmpty } from 'class-validator';
 
-export class CreateNewslettersDeliveryDto {
+export class NewslettersDeliveryDto {
   @IsInt()
   @IsNotEmpty()
   readonly user: number;

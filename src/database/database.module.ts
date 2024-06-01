@@ -6,7 +6,7 @@ import { Users } from '../models/users/entities/users.entity';
 import { Subscribers } from 'src/models/subscribers/entities/subscribers.entity';
 import { Newsletters } from 'src/models/newsletters/entities/newsletters.entity';
 
-const API_KEY = '12345634';
+const API_KEY = '123456';
 
 @Module({
   imports: [

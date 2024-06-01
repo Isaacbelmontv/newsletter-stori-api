@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateNewslettersDeliveryDto } from '../dtos/newsletters-delivery.dto';
-import { NewslettersDelivery } from '../entities/newsletters-delivery.entity';
-import { Users } from '../../users/entities/users.entity';
-import { Subscribers } from '../../subscribers/entities/subscribers.entity';
 import { Newsletters } from '../../newsletters/entities/newsletters.entity';
+import { Subscribers } from '../../subscribers/entities/subscribers.entity';
+import { Users } from '../../users/entities/users.entity';
+import { NewslettersDeliveryDto } from '../dtos/newsletters-delivery.dto';
+import { NewslettersDelivery } from '../entities/newsletters-delivery.entity';
 
 @Injectable()
 export class NewslettersDeliveryService {
@@ -20,7 +20,7 @@ export class NewslettersDeliveryService {
     private newslettersRepo: Repository<Newsletters>,
   ) {}
 
-  async create(data: CreateNewslettersDeliveryDto) {
+  async create(data: NewslettersDeliveryDto) {
     const newNewsletterDelivery = this.newslettersDeliveryRepo.create();
 
     if (data.user) {

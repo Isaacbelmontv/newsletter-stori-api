@@ -7,18 +7,20 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { NewslettersDeliveryDto } from '../dtos/newsletters-delivery.dto';
-import { NewslettersDeliveryService } from '../services/newsletters-delivery.service';
+import { sendNewsletterEmailDto } from '../dtos/send-newsletter-email.dto';
+import { SendNewsletterEmailUseCases } from '../send-newsletter-email.use-case';
 
-@Controller('newsletters-delivery')
-export class NewslettersDeliveryController {
-  constructor(private newslettersDeliveryService: NewslettersDeliveryService) {}
+@Controller('send-newsletter')
+export class sendNewsletterEmailController {
+  constructor(
+    private sendNewsletterEmailUseCases: SendNewsletterEmailUseCases,
+  ) {}
 
   @Post()
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
-  create(@Body() payload: NewslettersDeliveryDto) {
+  async create(@Body() payload: sendNewsletterEmailDto) {
     try {
-      this.newslettersDeliveryService.create(payload);
+      await this.sendNewsletterEmailUseCases.sendNewsLetterEMail(payload);
       return {
         message: 'newsletters delivery created successfully',
         status: HttpStatus.OK,

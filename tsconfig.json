@@ -19,7 +19,9 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@services/*": ["./src/services/*"],
-      "@models/*": ["./src/models/*"]
+      "@models/*": ["./src/models/*"],
+      "@interfaces/*": ["./src/commons/interfaces/*"],
+      "@use-cases/*": ["./src/use-cases/*"]
     }
   }
 }

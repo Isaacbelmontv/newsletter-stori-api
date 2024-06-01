@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateNewslettersDto {
   @IsString()
@@ -9,7 +9,8 @@ export class CreateNewslettersDto {
   @IsNotEmpty()
   readonly content: string;
 
-  assets: Express.Multer.File;
+  @IsOptional()
+  assetFile: Express.Multer.File;
 
   @IsNotEmpty()
   readonly user: number;

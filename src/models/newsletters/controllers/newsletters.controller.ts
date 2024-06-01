@@ -12,14 +12,14 @@ import {
 import { CreateNewslettersDto } from '../dtos/newsletters.dto';
 import { NewslettersService } from '../services/newsletters.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Express } from 'express'; // Importa Express correctamente
+import { Express } from 'express';
 
 @Controller('newsletters')
 export class NewslettersController {
   constructor(private newslettersService: NewslettersService) {}
 
   @Post()
-  @UseInterceptors(FileInterceptor('assets'))
+  @UseInterceptors(FileInterceptor('assetFile'))
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   async create(
     @Body() payload: CreateNewslettersDto,
@@ -27,7 +27,7 @@ export class NewslettersController {
   ) {
     try {
       if (file) {
-        payload.assets = file;
+        payload.assetFile = file;
       }
 
       await this.newslettersService.create(payload);

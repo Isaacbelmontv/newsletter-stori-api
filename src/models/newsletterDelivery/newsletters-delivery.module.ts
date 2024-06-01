@@ -18,5 +18,6 @@ import { NewslettersDeliveryService } from './services/newsletters-delivery.serv
   ],
   controllers: [NewslettersDeliveryController],
   providers: [NewslettersDeliveryService],
+  exports: [NewslettersDeliveryService],
 })
 export class NewslettersDeliveryModule {}
