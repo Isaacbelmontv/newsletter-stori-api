@@ -1,6 +1,6 @@
 import { IsString, IsNotEmpty, IsEmail, Length } from 'class-validator';
 
-export class CreateUsersDto {
+export class UsersDto {
   @IsString()
   @IsEmail()
   readonly email: string;
@@ -9,7 +9,9 @@ export class CreateUsersDto {
   @IsNotEmpty()
   @Length(6)
   readonly password: string;
+}
 
+export class CreateUsersDto extends UsersDto {
   @IsNotEmpty()
   readonly role: string;
 }

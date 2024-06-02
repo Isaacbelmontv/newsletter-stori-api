@@ -11,7 +11,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 
-import { CreateUsersDto } from '../dtos/users.dto';
+import { CreateUsersDto, UsersDto } from '../dtos/users.dto';
 import { UsersService } from '../services/users.service';
 
 @Controller('users')
@@ -36,6 +36,27 @@ export class UsersController {
       throw new HttpException(
         'Failed to create User',
         HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  @Post('login')
+  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+  async login(@Body() payload: UsersDto) {
+    try {
+      const user = await this.usersService.validateUser(
+        payload.email,
+        payload.password,
+      );
+      return {
+        message: 'Login successful',
+        user,
+        status: HttpStatus.OK,
+      };
+    } catch (error) {
+      throw new HttpException(
+        'Invalid email or password',
+        HttpStatus.UNAUTHORIZED,
       );
     }
   }
