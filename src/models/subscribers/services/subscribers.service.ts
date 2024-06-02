@@ -19,23 +19,27 @@ export class SubscribersService {
   ) {}
 
   async create(data: CreateSubscribersDto) {
-    const newSubscribers = new Subscribers();
-    newSubscribers.active = true;
-    newSubscribers.email = data.email;
+    try {
+      const newSubscribers = new Subscribers();
+      newSubscribers.active = true;
+      newSubscribers.email = data.email;
 
-    if (data.newsletters) {
-      const newsletters = await this.newslettersRepo.findOne({
-        where: { id: data.newsletters },
-      });
+      if (data.newsletters) {
+        const newsletters = await this.newslettersRepo.findOne({
+          where: { id: data.newsletters },
+        });
 
-      if (newsletters) {
-        newSubscribers.newsletters = newsletters;
-      } else {
-        throw new Error('newsletters not found');
+        if (newsletters) {
+          newSubscribers.newsletters = newsletters;
+        } else {
+          throw new Error('newsletters not found');
+        }
       }
-    }
 
-    return this.subscribersRepo.save(newSubscribers);
+      return this.subscribersRepo.save(newSubscribers);
+    } catch (error) {
+      throw new Error('subscriptions error');
+    }
   }
 
   async update(id: number, changes: UpdateSubscribersDto) {

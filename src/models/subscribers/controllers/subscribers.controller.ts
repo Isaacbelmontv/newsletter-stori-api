@@ -22,9 +22,9 @@ export class SubscribersController {
 
   @Post()
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
-  create(@Body() payload: CreateSubscribersDto) {
+  async create(@Body() payload: CreateSubscribersDto) {
     try {
-      this.subscribersService.create(payload);
+      await this.subscribersService.create(payload);
       return {
         message: 'subscription created successfully',
         status: HttpStatus.OK,
