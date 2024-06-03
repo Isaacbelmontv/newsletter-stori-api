@@ -21,7 +21,7 @@ import { sendNewsletterEmailModule } from '@use-cases/send-newsletter-email/send
       useFactory: async (configService: ConfigService) => ({
         transport: {
           host: configService.get('EMAIL_HOST'),
-          port: 2525,
+          port: 587,
           secure: false,
           auth: {
             user: configService.get('EMAIL_USERNAME'),
