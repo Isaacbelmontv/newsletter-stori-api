@@ -8,7 +8,7 @@ async function bootstrap() {
     origin: 'http://localhost:4200',
     methods: 'GET,PUT,POST',
   });
-  await app.listen(3000);
+  await app.listen(3000, '0.0.0.0');
   const logger = new Logger('bootstrap');
   logger.log(`Listening on ${await app.getUrl()}`);
 }

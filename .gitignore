@@ -33,8 +33,7 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-/new_postgres_data
-**/postgres/
+/pgdata
 
 /src/database/migrations/*
 !/src/database/migrations/.gitkeep
