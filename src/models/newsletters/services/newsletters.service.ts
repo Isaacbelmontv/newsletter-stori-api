@@ -69,9 +69,6 @@ export class NewslettersService {
         'newsletter.id AS id',
         'newsletter.title AS title',
         'newsletter.content AS content',
-        'newsletter.assetFile AS assetFile',
-        'newsletter.assetName AS assetName',
-        'newsletter.assetType AS assetType',
       ])
       .getRawMany();
 
