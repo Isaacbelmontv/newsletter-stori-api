@@ -74,4 +74,22 @@ export class SubscribersController {
       );
     }
   }
+
+  @Get()
+  async getAll() {
+    try {
+      const subscriptions = await this.subscribersService.findAll();
+
+      if (!subscriptions) {
+        throw new HttpException('No subscriptions found', HttpStatus.NOT_FOUND);
+      }
+
+      return subscriptions;
+    } catch (error) {
+      throw new HttpException(
+        'Failed to get subscriptions',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
 }

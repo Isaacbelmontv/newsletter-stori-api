@@ -88,4 +88,23 @@ export class SubscribersService {
       throw new Error(`Failed to get subscriptions by email`);
     }
   }
+
+  async findAll() {
+    try {
+      const subscribers = await this.subscribersRepo.find({
+        where: {
+          active: true,
+        },
+        select: ['id', 'email', 'active'],
+      });
+
+      if (!subscribers.length) {
+        return null;
+      }
+
+      return subscribers;
+    } catch (error) {
+      throw new Error(`Failed to get subscriptions`);
+    }
+  }
 }

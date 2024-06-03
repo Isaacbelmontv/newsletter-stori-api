@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
   Post,
@@ -38,6 +39,24 @@ export class NewslettersController {
     } catch (error) {
       throw new HttpException(
         'Failed to create newsletters',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  @Get()
+  async get() {
+    try {
+      const newsletters = await this.newslettersService.findAll();
+
+      if (!newsletters) {
+        throw new HttpException('No newsletters', HttpStatus.NOT_FOUND);
+      }
+
+      return newsletters;
+    } catch (error) {
+      throw new HttpException(
+        'Failed to get newsletters',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }

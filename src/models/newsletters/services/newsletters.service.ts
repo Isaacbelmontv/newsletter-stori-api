@@ -61,4 +61,23 @@ export class NewslettersService {
     }
     return newsletter;
   }
+
+  async findAll(): Promise<INewsletter[]> {
+    const newsletter = await this.newslettersRepo
+      .createQueryBuilder('newsletter')
+      .select([
+        'newsletter.id AS id',
+        'newsletter.title AS title',
+        'newsletter.content AS content',
+        'newsletter.assetFile AS assetFile',
+        'newsletter.assetName AS assetName',
+        'newsletter.assetType AS assetType',
+      ])
+      .getRawMany();
+
+    if (!newsletter) {
+      throw new NotFoundException(`Newsletters not found`);
+    }
+    return newsletter;
+  }
 }
