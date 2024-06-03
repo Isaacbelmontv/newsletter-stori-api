@@ -16,6 +16,12 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@services/*": ["./src/services/*"],
+      "@models/*": ["./src/models/*"],
+      "@interfaces/*": ["./src/commons/interfaces/*"],
+      "@use-cases/*": ["./src/use-cases/*"]
+    }
   }
 }

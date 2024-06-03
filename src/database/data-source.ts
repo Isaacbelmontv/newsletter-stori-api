@@ -12,7 +12,7 @@ export const dataSourceOptions: DataSourceOptions = {
   database: configService.get('POSTGRES_DB'),
   port: configService.get('POSTGRES_PORT'),
   host: configService.get('POSTGRES_HOST'),
-  synchronize: false,
+  synchronize: false, //false for run migrations
   logging: true,
   entities: ['src/**/*.entity.{ts,js}'],
   migrations: ['src/database/migrations/*.{ts,js}'],

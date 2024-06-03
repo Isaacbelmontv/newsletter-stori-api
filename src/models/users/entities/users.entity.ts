@@ -1,13 +1,16 @@
+import { NewslettersDelivery } from '@models/newsletterDelivery/entities/newsletters-delivery.entity';
+import { Newsletters } from '@models/newsletters/entities/newsletters.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class User {
+export class Users {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -15,7 +18,7 @@ export class User {
   email: string;
 
   @Column({ type: 'varchar', length: 255 })
-  password: string; // encript
+  password: string;
 
   @Column({ type: 'varchar', length: 100 })
   role: string;
@@ -31,4 +34,13 @@ export class User {
     default: () => 'CURRENT_TIMESTAMP',
   })
   updateAt: Date;
+
+  @OneToMany(() => Newsletters, (newsletters) => newsletters.user)
+  newsletters: Newsletters[];
+
+  @OneToMany(
+    () => NewslettersDelivery,
+    (newslettersDelivery) => newslettersDelivery.user,
+  )
+  newslettersDeliveries: NewslettersDelivery[];
 }
