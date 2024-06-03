@@ -25,8 +25,8 @@
 ## Run docker
 
 ```bash
-docker build -t stori-api .
-docker run -p 3000:3000 stori-api
+docker compose build
+docker compose up
 ```
 
 ## Run local

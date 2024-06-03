@@ -1,14 +1,33 @@
 services:
   postgres:
     image: postgres:13
+    restart: always
+    environment:
+      - POSTGRES_DB=my_db
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=123456
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: newsletter-stori-api
+    env_file:
+      - .env
     environment:
       - POSTGRES_DB=my_db
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=123456
     ports:
-      - '5432:5432'
+      - '3000:3000'
+    depends_on:
+      - postgres
     volumes:
-      - ./new_postgres_data:/var/lib/postgresql/data
+      - ./src:/app/src
 
   pgadmin:
     image: dpage/pgadmin4
