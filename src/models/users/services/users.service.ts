@@ -4,7 +4,6 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { CreateUsersDto } from '../dtos/users.dto';
 import { Users } from '../entities/users.entity';
@@ -32,10 +31,11 @@ export class UsersService {
       throw new UnauthorizedException('Invalid email or password');
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      throw new UnauthorizedException('Invalid email or password');
+    //TODO: Use bcrypt to compare passwords
+    if (password !== user.password) {
+      throw new UnauthorizedException('Invalid password');
     }
+
     return user;
   }
 }

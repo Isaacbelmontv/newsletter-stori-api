@@ -22,16 +22,29 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Run docker
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+```bash
+docker build -t stori-api .
+docker run -p 3000:3000 stori-api
+```
 
-## Installation
+## Run local
 
 ```bash
 $ npm install
+
+$ docker-compose up -d postgres
+
+$ npm run migration:generate --init
+
+$ npm run migration:run --init
+
+$ npm start:dev
+
 ```
 
+<!--
 ## Running the app
 
 ```bash
@@ -60,4 +73,4 @@ $ npm run test:cov
 
 ## DB diagram
 
-![DB](diagram.png)
+![DB](diagram.png) -->

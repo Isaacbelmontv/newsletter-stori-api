@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { Express } from 'express';
 
 export class CreateNewslettersDto {
   @IsString()
