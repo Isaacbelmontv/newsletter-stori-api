@@ -44,16 +44,19 @@ export class Newsletters {
   })
   updateAt: Date;
 
-  @ManyToOne(() => Users, (user) => user.newsletters)
+  @ManyToOne(() => Users, (user) => user.newsletters, { nullable: true })
   @JoinColumn({ name: 'user_id' })
   user: Users;
 
   @OneToMany(
     () => NewslettersDelivery,
     (newslettersDelivery) => newslettersDelivery.newsletters,
+    { nullable: true },
   )
   newslettersDeliveries: NewslettersDelivery;
 
-  @OneToMany(() => Subscribers, (subscribers) => subscribers.newsletters)
+  @OneToMany(() => Subscribers, (subscribers) => subscribers.newsletters, {
+    nullable: true,
+  })
   subscribers: Subscribers;
 }

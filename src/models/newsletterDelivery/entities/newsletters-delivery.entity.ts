@@ -26,18 +26,22 @@ export class NewslettersDelivery {
   })
   updateAt: Date;
 
-  @ManyToOne(() => Users, (user) => user.newslettersDeliveries)
+  @ManyToOne(() => Users, (user) => user.newslettersDeliveries, {
+    nullable: true,
+  })
   user: Users;
 
   @ManyToOne(
     () => Subscribers,
     (subscriber) => subscriber.newslettersDeliveries,
+    { nullable: true },
   )
   subscriber: Subscribers;
 
   @ManyToOne(
     () => Newsletters,
     (newsletters) => newsletters.newslettersDeliveries,
+    { nullable: true },
   )
   newsletters: Newsletters;
 }
