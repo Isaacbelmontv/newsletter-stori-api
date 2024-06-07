@@ -35,12 +35,15 @@ export class Users {
   })
   updateAt: Date;
 
-  @OneToMany(() => Newsletters, (newsletters) => newsletters.user)
+  @OneToMany(() => Newsletters, (newsletters) => newsletters.user, {
+    nullable: true,
+  })
   newsletters: Newsletters[];
 
   @OneToMany(
     () => NewslettersDelivery,
     (newslettersDelivery) => newslettersDelivery.user,
+    { nullable: true },
   )
   newslettersDeliveries: NewslettersDelivery[];
 }

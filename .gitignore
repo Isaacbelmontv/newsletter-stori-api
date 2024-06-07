@@ -34,6 +34,3 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 /pgdata
-
-/src/database/migrations/*
-!/src/database/migrations/.gitkeep
