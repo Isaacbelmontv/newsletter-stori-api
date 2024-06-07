@@ -18,7 +18,7 @@ export class SeedService {
   async seedData() {
     await Promise.all([
       this.userRepo.save([
-        { email: 'admin@stori.com', password: 'admin', role: 'admin' },
+        { email: 'admin@stori.com', password: '123456', role: 'admin' },
       ]),
       this.newslettersRepo.save([
         {
